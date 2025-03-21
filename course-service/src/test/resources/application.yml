@@ -16,11 +16,3 @@ mybatis-plus:
 logging:
   level:
     com.sspu.mapper: debug # 把 com.sspu.mapper 包下的日志级别设为 debug
-
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    config:
-      title: EduTechCore
