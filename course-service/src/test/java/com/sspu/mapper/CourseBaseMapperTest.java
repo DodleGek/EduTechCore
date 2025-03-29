@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sspu.dto.PageParams;
 import com.sspu.dto.PageResult;
-import com.sspu.dto.QueryCourseParamsDto;
+import com.sspu.dto.QueryCourseParamDto;
 import com.sspu.entity.CourseBase;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
@@ -27,9 +27,8 @@ class CourseBaseMapperTest {
 
         //详细进行分页查询的单元测试
         //查询条件
-        QueryCourseParamsDto courseParamsDto = new QueryCourseParamsDto();
+        QueryCourseParamDto courseParamsDto = new QueryCourseParamDto();
         courseParamsDto.setCourseName("java"); //课程名称
-        //todo: 缺乏课程审核状态
 
 
         LambdaQueryWrapper<CourseBase> queryWrapper = new LambdaQueryWrapper<>();

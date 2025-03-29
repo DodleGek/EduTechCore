@@ -1,0 +1,17 @@
+### 查看课程计划树形结构
+GET {{course_host}}/teachplan/117/tree-nodes
+Content-Type: application/json
+
+### 添加课程计划
+POST {{course_host}}/teachplan
+Content-Type: application/json
+
+{
+  "id": 0,
+  "parentid": 117,
+  "grade": "1",
+  "pname": "第一节",
+  "description": "第一节",
+  "orderby": 1,
+  "status": "1"
+}

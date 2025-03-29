@@ -1,12 +1,49 @@
 package com.sspu.service;
 
-import com.sspu.dto.PageParams;
-import com.sspu.dto.PageResult;
-import com.sspu.dto.QueryCourseParamsDto;
+import com.sspu.dto.*;
 import com.sspu.entity.CourseBase;
 
 public interface CourseBaseInfoService {
+    /**
+     * 课程查询接口
+     *
+     * @param pageParams        分页参数
+     * @param queryCourseParams 查询条件
+     * @return
+     */
+    PageResult<CourseBase> queryCourseBaseList(Long companyId, PageParams pageParams, QueryCourseParamDto queryCourseParams);
 
-    // 课程分页查询
-    PageResult<CourseBase> queryCourseBaseList(PageParams params, QueryCourseParamsDto queryCourseParamsDto);
+    /**
+     * 新增课程基本信息
+     *
+     * @param companyId    教学机构id
+     * @param addCourseDto 课程基本信息
+     * @return
+     */
+    CourseBaseInfoDto createCourseBase(Long companyId, AddCourseDto addCourseDto);
+
+    /**
+     * 根据课程id查询课程基本信息
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    CourseBaseInfoDto getCourseBaseInfo(Long courseId);
+
+    /**
+     * 修改课程信息
+     *
+     * @param companyId 机构id，本机构只能修改本机构课程
+     * @return
+     */
+    CourseBaseInfoDto updateCourseBase(Long companyId, EditCourseDto editCourseDto);
+
+    /**
+     * 删除课程信息
+     *
+     * @param companyId 教学机构id
+     * @param courseId  课程id
+     * @return
+     */
+    void deleteCourse(Long companyId, Long courseId);
 }

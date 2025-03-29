@@ -7,9 +7,9 @@
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="label" property="label" />
-        <result column="parentid" property="parentId" />
+        <result column="parent_id" property="parentId"/>
         <result column="is_show" property="isShow" />
-        <result column="orderby" property="orderBy" />
+        <result column="orderby" property="orderby"/>
         <result column="is_leaf" property="isLeaf" />
     </resultMap>
 
@@ -22,7 +22,7 @@
         <id column="one_id" property="id" />
         <result column="one_name" property="name" />
         <result column="one_label" property="label" />
-        <result column="one_orderby" property="orderBy" />
+        <result column="one_orderby" property="orderby"/>
         <result column="one_parentid" property="parentId" />
         <result column="one_is_leaf" property="isLeaf" />
 
@@ -31,7 +31,7 @@
             <id column="two_id" property="id" />
             <result column="two_name" property="name" />
             <result column="two_label" property="label" />
-            <result column="two_orderby" property="orderBy" />
+            <result column="two_orderby" property="orderby"/>
             <result column="two_parentid" property="parentId" />
             <result column="two_is_leaf" property="isLeaf" />
         </collection>
@@ -43,24 +43,25 @@
 
     <select id="selectTreeNodes" resultMap="selectTreeNodesMap">
         SELECT
-            one.id one_id,
-            one.name one_name,
-            one.label one_label,
-            one.orderby one_orderby,
-            one.parentid one_parentid,
-            one.is_leaf one_is_leaf,
-            two.id two_id,
-            two.name two_name,
-            two.label two_label,
-            two.orderby two_orderby,
-            two.parentid two_parentid,
-            two.is_leaf two_is_leaf
+        one.id AS one_id,
+        one.name AS one_name,
+        one.label AS one_label,
+        one.orderby AS one_orderby,
+        one.parent_id AS one_parentid,  <!-- 数据库列名 → 别名 -->
+        one.is_leaf AS one_is_leaf,
+        two.id AS two_id,
+        two.name AS two_name,
+        two.label AS two_label,
+        two.orderby AS two_orderby,
+        two.parent_id AS two_parentid,  <!-- 数据库列名 → 别名 -->
+        two.is_leaf AS two_is_leaf
         FROM
             course_category one
-                LEFT JOIN course_category two ON one.id = two.parentid
+        LEFT JOIN course_category two
+        ON one.id = two.parent_id  <!-- 连接条件使用数据库列名 -->
         WHERE
             one.is_show = '1'
-          AND (two.is_show = '1' OR two.id IS NULL)
+        AND (two.is_show = '1' OR two.id IS NULL)
         ORDER BY
             one.orderby,
             two.orderby
