@@ -1,5 +1,5 @@
 ###  分页查询课程信息
-POST {{course_host}}/course/list?pageNum=1&pageSize=10
+POST localhost:8001/course/list?pageNum=1&pageSize=10
 Content-Type: application/json
 
 {

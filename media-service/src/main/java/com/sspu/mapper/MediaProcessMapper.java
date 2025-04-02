@@ -3,7 +3,7 @@ package com.sspu.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sspu.entity.MediaProcess;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +17,6 @@ public interface MediaProcessMapper extends BaseMapper<MediaProcess> {
      * @param count      任务数
      * @return
      */
-    @Select("SELECT * FROM media_process WHERE id % #{shardTotal} = #{shardIndex} AND status = '1' LIMIT #{count}")
     List<MediaProcess> selectListByShardIndex(@Param("shardTotal") int shardTotal, @Param("shardIndex") int shardIndex, @Param("count") int count);
 
 }
