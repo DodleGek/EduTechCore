@@ -20,6 +20,7 @@
         <module>auth-service</module>
         <module>system-service</module>
         <module>media-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <properties>
@@ -141,8 +142,21 @@
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>4.8.1</version>
+                <version>4.12.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.j256.simplemagic</groupId>
+                <artifactId>simplemagic</artifactId>
+                <version>1.17</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.17.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

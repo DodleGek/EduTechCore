@@ -8,13 +8,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author itcast
- */
 @Data
 @TableName("media_process_history")
 public class MediaProcessHistory implements Serializable {

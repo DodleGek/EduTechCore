@@ -1,6 +1,6 @@
 spring:
   application:
-    name: course-service
+    name: gateway-service
   profiles:
     active: dev
   cloud:
@@ -10,10 +10,10 @@ spring:
       password: nacos
       discovery:
         namespace: 61728b3c-2f54-4912-99d4-b7b283fad8f7
-        group: course-service
+        group: gateway-service
       config:
         namespace: 61728b3c-2f54-4912-99d4-b7b283fad8f7
-        group: course-service
+        group: gateway-service
         file-extension: yaml
         refresh-enabled: true
         shared-configs:
@@ -21,4 +21,4 @@ spring:
             group: common-module
             refresh: true
   config:
-    import: nacos:course-service-${spring.profiles.active}.yaml
+    import: nacos:gateway-service-${spring.profiles.active}.yaml

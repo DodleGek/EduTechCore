@@ -13,14 +13,14 @@ import java.io.IOException;
 @RestController
 public class BigFilesController {
 
-    private MediaFileService mediaFileService;
+    private final MediaFileService mediaFileService;
 
     private BigFilesController(MediaFileService mediaFileService) {
         this.mediaFileService = mediaFileService;
     }
 
     @PostMapping("/upload/uploadchunk")
-    public RuploadChunk(@RequestParam("file") MultipartFile file, @RequestParam("fileMd5") String fileMd5, @RequestParam("chunk") int chunk) throws Exception {
+    public R<Boolean> RuploadChunk(@RequestParam("file") MultipartFile file, @RequestParam("fileMd5") String fileMd5, @RequestParam("chunk") int chunk) throws Exception {
         return mediaFileService.uploadChunk(fileMd5, chunk, file.getBytes());
     }
 
@@ -35,7 +35,7 @@ public class BigFilesController {
     }
 
     @PostMapping("/upload/mergechunks")
-    public R mergeChunks(@RequestParam("fileMd5") String fileMd5, @RequestParam("fileName") String fileName, @RequestParam("chunkTotal") int chunkTotal) throws IOException {
+    public R<Boolean> mergeChunks(@RequestParam("fileMd5") String fileMd5, @RequestParam("fileName") String fileName, @RequestParam("chunkTotal") int chunkTotal) throws IOException {
         Long companyId = 1232141425L;
         UploadFileParamsDto uploadFileParamsDto = new UploadFileParamsDto();
         uploadFileParamsDto.setFileType("001002");

@@ -8,7 +8,6 @@ import com.sspu.mapper.MediaProcessMapper;
 import com.sspu.service.MediaFileProcessService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +18,15 @@ import java.util.List;
 @Service
 public class MediaFileProcessServiceImpl implements MediaFileProcessService {
 
-    @Autowired
-    private MediaProcessHistoryMapper mediaProcessHistoryMapper;
-    @Autowired
-    private MediaProcessMapper mediaProcessMapper;
 
+    private final MediaProcessHistoryMapper mediaProcessHistoryMapper;
+
+    private final MediaProcessMapper mediaProcessMapper;
+
+    public MediaFileProcessServiceImpl(MediaProcessHistoryMapper mediaProcessHistoryMapper, MediaProcessMapper mediaProcessMapper) {
+        this.mediaProcessHistoryMapper = mediaProcessHistoryMapper;
+        this.mediaProcessMapper = mediaProcessMapper;
+    }
     @Override
     public List<MediaProcess> getMediaProcessList(int shardTotal, int shardIndex, int count) {
         return mediaProcessMapper.selectListByShardIndex(shardTotal, shardIndex, count);

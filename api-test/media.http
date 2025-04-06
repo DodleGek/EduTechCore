@@ -1,0 +1,24 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### 媒资文件查询
+POST http://localhost:8007/files
+Content-Type: application/json
+
+{
+  "auditStatus": "202004",
+  "courseName": "java",
+  "publishStatus": ""
+}
+
+
+### 上传图片
+POST {{media_host}}/upload/coursefile
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="filedata"; filename="test.jpg"
+Content-Type: application/octet-stream
+
+< d:/test.jpg

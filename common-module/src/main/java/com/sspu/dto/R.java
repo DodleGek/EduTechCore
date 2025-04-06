@@ -29,20 +29,20 @@ public class R<T> {
     /**
      * 错误信息的封装
      */
-    public static <T> R<T> validfail() {
+    public static <T> R<T> fail() {
         R<T> response = new R<>();
         response.setCode(-1);
         return response;
     }
 
-    public static <T> R<T> validfail(String msg) {
+    public static <T> R<T> fail(String msg) {
         R<T> response = new R<>();
         response.setCode(-1);
         response.setMsg(msg);
         return response;
     }
 
-    public static <T> R<T> validfail(String msg, T result) {
+    public static <T> R<T> fail(String msg, T result) {
         R<T> response = new R<>();
         response.setCode(-1);
         response.setMsg(msg);

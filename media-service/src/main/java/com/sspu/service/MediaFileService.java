@@ -11,7 +11,7 @@ public interface MediaFileService {
     /**
      * @param pageParams          分页参数
      * @param queryMediaParamsDto 查询条件
-     * @return com.xuecheng.base.model.PageResult<com.xuecheng.media.model.po.MediaFiles>
+     * @return
      */
     PageResult<MediaFiles> queryMediaFiles(Long companyId, PageParams pageParams, QueryMediaParamsDto queryMediaParamsDto);
 
@@ -22,7 +22,7 @@ public interface MediaFileService {
      * @param bytes               文件字节数组
      * @param folder              桶下边的子目录
      * @param objectName          对象名称
-     * @return com.xuecheng.media.model.dto.UploadFileResultDto
+     * @return
      */
     UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, byte[] bytes, String folder, String objectName);
 
@@ -62,7 +62,7 @@ public interface MediaFileService {
      * @param bytes   文件字节
      * @return
      */
-    R uploadChunk(String fileMd5, int chunk, byte[] bytes);
+    R<Boolean> uploadChunk(String fileMd5, int chunk, byte[] bytes);
 
     /**
      * 合并分块
@@ -73,7 +73,7 @@ public interface MediaFileService {
      * @param uploadFileParamsDto 文件信息
      * @return
      */
-    R mergeChunks(Long companyId, String fileMd5, int chunkTotal, UploadFileParamsDto uploadFileParamsDto) throws IOException;
+    R<Boolean> mergeChunks(Long companyId, String fileMd5, int chunkTotal, UploadFileParamsDto uploadFileParamsDto) throws IOException;
 
     MediaFiles getFileById(String mediaId);
 
