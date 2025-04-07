@@ -10,16 +10,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 媒体文件开放接口控制器
+ * 提供对外开放的媒体文件访问接口
+ */
 @RestController
 @RequestMapping("/open")
 public class MediaOpenController {
 
-    private MediaFileService mediaFileService;
+    private final MediaFileService mediaFileService;
 
+    /**
+     * 构造方法注入MediaFileService
+     *
+     * @param mediaFileService 媒体文件服务
+     */
     MediaOpenController(MediaFileService mediaFileService) {
         this.mediaFileService = mediaFileService;
     }
 
+    /**
+     * 获取媒体文件的访问地址
+     *
+     * @param mediaId 媒体文件ID
+     * @return 包含媒体文件访问URL的响应对象
+     */
     @GetMapping("/preview/{mediaId}")
     public R<String> getMediaUrl(@PathVariable String mediaId) {
         MediaFiles mediaFile = mediaFileService.getFileById(mediaId);

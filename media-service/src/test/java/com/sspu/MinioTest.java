@@ -7,6 +7,7 @@ import io.minio.RemoveObjectArgs;
 import io.minio.errors.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class MinioTest {
 
@@ -62,5 +65,36 @@ public class MinioTest {
                         .build()
         );
         System.out.println("文件删除成功");
+    }
+
+    @Test
+    // 上传分块文件
+    public void test_upload_chunk() throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        String chunkFolder = "/Users/syw/Desktop/chunk/";
+        File chunkDir = new File(chunkFolder);
+        if (!chunkDir.exists() || !chunkDir.isDirectory()) {
+            throw new RuntimeException("分块文件夹不存在");
+        }
+
+        File[] chunkFiles = chunkDir.listFiles();
+        if (chunkFiles == null || chunkFiles.length == 0) {
+            throw new RuntimeException("没有找到分块文件");
+        }
+
+        // 按文件名数字顺序排序
+        Arrays.sort(chunkFiles, Comparator.comparingInt(f -> Integer.parseInt(f.getName())));
+
+        for (File chunkFile : chunkFiles) {
+            try (FileInputStream fis = new FileInputStream(chunkFile)) {
+                minioClient.putObject(
+                        PutObjectArgs.builder()
+                                .bucket("test")
+                                .object("chunk/" + chunkFile.getName())
+                                .stream(fis, fis.available(), -1)
+                                .build()
+                );
+                System.out.println("分块文件上传成功：" + chunkFile.getName());
+            }
+        }
     }
 }
